@@ -10,7 +10,7 @@ class ApiClient {
             HttpLoggingInterceptor().setLevel(
                 HttpLoggingInterceptor.Level.BODY
             )
-        ).build()
+        ).addInterceptor(HeaderAuthorization()).build()
 
         @Volatile
         private var INSTANCE: Retrofit? = null
@@ -19,6 +19,7 @@ class ApiClient {
             INSTANCE ?: synchronized(this) {
                 val instance = Retrofit.Builder()
                     .client(client)
+                    .baseUrl("https://newsapi.org/")
                     .build()
                 INSTANCE = instance
                 instance
