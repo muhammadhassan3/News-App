@@ -19,7 +19,7 @@ class ApiClient {
             INSTANCE ?: synchronized(this) {
                 val instance = Retrofit.Builder()
                     .client(client)
-                    .baseUrl("https://newsapi.org/")
+                    .baseUrl("https://newsapi.org/v2/")
                     .build()
                 INSTANCE = instance
                 instance
