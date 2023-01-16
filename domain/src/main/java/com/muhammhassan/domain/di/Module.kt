@@ -1,4 +1,4 @@
-package com.muhammhassan.domain.utils
+package com.muhammhassan.domain.di
 
 import com.muhammhassan.domain.interactor.MainInteractor
 import com.muhammhassan.domain.usecase.MainUseCase
