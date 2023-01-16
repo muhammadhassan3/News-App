@@ -1,37 +1,26 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
-    id 'kotlin-kapt'
 }
 
-apply from: '../shared_dependencies.gradle'
-
 android {
-    namespace 'com.muhammhassan.newsapp'
+    namespace 'com.muhammhassan.domain'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.muhammhassan.newsapp"
         minSdk 23
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            buildConfigField "String", "API_KEY", '"410ba3e7ec4a43de9ad8afdd39de4dac"'
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    buildFeatures{
-        viewBinding true
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,6 +31,5 @@ android {
 }
 
 dependencies {
-    implementation project(":domain")
-    implementation fileTree(dir: 'libs', includes: ['*.jar'])
+    implementation project(':core')
 }
