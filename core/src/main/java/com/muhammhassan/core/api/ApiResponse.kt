@@ -1,7 +1,11 @@
 package com.muhammhassan.core.api
 
-class ApiResponse<out T>(status: Status, data: T? = null, errorMessage: String? = null) {
-    companion object{
+class ApiResponse<out T>(
+    val status: Status,
+    val data: T? = null,
+    val errorMessage: String? = null
+) {
+    companion object {
         fun <T> success(data: T): ApiResponse<T> = ApiResponse(status = Status.SUCCESS, data = data)
         fun <T> error(errorMessage: String): ApiResponse<T> = ApiResponse(status = Status.ERROR)
         fun <T> loading(): ApiResponse<T> = ApiResponse(status = Status.LOADING)

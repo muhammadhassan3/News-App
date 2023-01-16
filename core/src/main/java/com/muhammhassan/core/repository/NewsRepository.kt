@@ -5,5 +5,5 @@ import com.muhammhassan.core.api.model.Articles
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
-    fun getNews(): Flow<ApiResponse<Articles>>
+    fun getNews(): Flow<ApiResponse<List<Articles>>>
 }

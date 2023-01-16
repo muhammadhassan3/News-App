@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class RemoteDataSourceImpl(val api: ApiInterface) : RemoteDataSource{
-    override fun getNews(): Flow<ApiResponse<Articles>> = flow {
+    override fun getNews(): Flow<ApiResponse<List<Articles>>> = flow {
         emit(ApiResponse.loading())
         try{
             val response = api.getNews()
