@@ -21,4 +21,15 @@ class MainInteractor(private val repository: NewsRepository) : MainUseCase {
             }
         }
     }
+
+    companion object{
+        @Volatile
+        private var INSTANCE: MainInteractor? = null
+
+        fun getInstance(repository: NewsRepository) = INSTANCE ?: synchronized(this){
+            val instance = MainInteractor(repository)
+            INSTANCE = instance
+            instance
+        }
+    }
 }

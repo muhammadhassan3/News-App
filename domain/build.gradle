@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply from: '../shared_dependencies.gradle'
+
 android {
     namespace 'com.muhammhassan.domain'
     compileSdk 33
@@ -32,4 +34,5 @@ android {
 
 dependencies {
     implementation project(':core')
+    implementation fileTree(dir: "libs", includes: ["*.jar"])
 }
