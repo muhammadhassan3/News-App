@@ -5,4 +5,7 @@
     <string name="header">Header</string>
     <string name="go_to_bookmark_list">Go to Bookmark List</string>
     <string name="bookmark_list">Bookmark List</string>
+    <string name="retry">Retry</string>
+    <string name="empty_data">No Data Found</string>
+    <string name="error_occured">Error Occured</string>
 </resources>

@@ -43,5 +43,10 @@ android {
 
 dependencies {
     implementation project(":domain")
+    implementation project(":core")
     implementation fileTree(dir: 'libs', includes: ['*.jar'])
+
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }

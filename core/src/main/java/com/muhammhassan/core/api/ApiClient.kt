@@ -3,6 +3,7 @@ package com.muhammhassan.core.api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
     companion object {
@@ -19,7 +20,8 @@ class ApiClient {
             INSTANCE ?: synchronized(this) {
                 val instance = Retrofit.Builder()
                     .client(client)
-                    .baseUrl("https://newsapi.org/v2/")
+                    .baseUrl("https://newsapi.org/")
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 INSTANCE = instance
                 instance
