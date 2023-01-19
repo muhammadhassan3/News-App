@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammhassan.core.api.Status
 import com.muhammhassan.domain.model.NewsModel
 import com.muhammhassan.domain.utils.UiState
 import com.muhammhassan.newsapp.R
+import com.muhammhassan.newsapp.adapter.NewsAdapter
 import com.muhammhassan.newsapp.databinding.FragmentListBinding
 import com.muhammhassan.newsapp.ui.viewmodel.MainViewModel
 import com.muhammhassan.newsapp.utils.Extension.hide
@@ -19,6 +23,7 @@ class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<MainViewModel>()
+    private lateinit var adapter: NewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +39,20 @@ class ListFragment : Fragment() {
         observeViewModel()
 
         viewModel.getData()
+
+        binding.apply{
+            toolbar.apply{
+                inflateMenu(R.menu.home_menu)
+                title = "Recent News"
+            }
+            adapter = NewsAdapter{
+                view.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(it))
+            }
+            rvList.adapter = adapter
+            rvList.layoutManager = LinearLayoutManager(requireContext())
+        }
+
+
     }
 
     private fun observeViewModel(){
@@ -81,8 +100,7 @@ class ListFragment : Fragment() {
         binding.apply {
             rvList.show()
             layoutError.root.hide()
-
-
+            adapter.setData(data)
         }
     }
 

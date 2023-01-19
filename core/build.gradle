@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
     id 'kotlin-kapt'
 }
 apply from: '../shared_dependencies.gradle'

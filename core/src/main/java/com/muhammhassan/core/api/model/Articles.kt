@@ -8,7 +8,7 @@ data class Articles(
     val title: String,
     val description: String?,
     val url: String,
-    val utlToImage: String,
+    val urlToImage: String,
     val publishedAt: Date,
     val content: String
 )

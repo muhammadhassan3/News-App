@@ -9,7 +9,7 @@ object Mapper {
             title = articles.title,
             desc = articles.description,
             content = articles.content,
-            image = articles.utlToImage,
+            image = articles.urlToImage,
             url = articles.url
         )
     }

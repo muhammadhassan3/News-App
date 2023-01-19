@@ -2,18 +2,44 @@ package com.muhammhassan.newsapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.muhammhassan.domain.model.NewsModel
+import com.muhammhassan.newsapp.R
 import com.muhammhassan.newsapp.databinding.ItemLayoutBinding
+import com.muhammhassan.newsapp.utils.Extension.loadImage
 
-class NewsAdapter(private val data: List<NewsModel>) :
+class NewsAdapter(private val onItemClick: (item: NewsModel) -> Unit) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+    private val data = arrayListOf<NewsModel>()
 
-    class ViewHolder(binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: NewsModel){
-
-        }
+    fun setData(newData: List<NewsModel>){
+        data.clear()
+        data.addAll(newData)
+        val diffCallback = NewsDiffUtil(data, newData)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        diffResult.dispatchUpdatesTo(this)
     }
+
+    class NewsDiffUtil(val oldData: List<NewsModel>, val newData: List<NewsModel>): DiffUtil.Callback(){
+        override fun getOldListSize(): Int {
+            return oldData.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newData.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldData[oldItemPosition].title == newData[newItemPosition].title
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldData[oldItemPosition] == newData[newItemPosition]
+        }
+
+    }
+    class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -25,6 +51,20 @@ class NewsAdapter(private val data: List<NewsModel>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        val item = data[position]
+        with(holder){
+            binding.apply {
+                tvDesc.text = item.desc
+                tvTitle.text = item.title
+                if(item.image != null){
+                    item.image?.let {
+                        imgHeader.loadImage(it)
+                    }
+                }else imgHeader.loadImage(R.drawable.baseline_image_not_supported_24)
+            }
+            itemView.setOnClickListener {
+                onItemClick.invoke(item)
+            }
+        }
     }
 }

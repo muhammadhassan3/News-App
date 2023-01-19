@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface ApiInterface {
 
-    @GET("v2/everything?language=en")
+    @GET("v2/everything?language=en&pageSize=30&q=kotlin")
     suspend fun getNews(): Response<NewsResponse>
 }
