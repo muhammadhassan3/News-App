@@ -1,14 +1,12 @@
 package com.muhammhassan.newsapp.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.muhammhassan.core.api.Status
 import com.muhammhassan.domain.model.NewsModel
 import com.muhammhassan.domain.utils.UiState
 import com.muhammhassan.newsapp.R
@@ -28,7 +26,7 @@ class ListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,13 +38,14 @@ class ListFragment : Fragment() {
 
         viewModel.getData()
 
-        binding.apply{
-            toolbar.apply{
+        binding.apply {
+            toolbar.apply {
                 inflateMenu(R.menu.home_menu)
                 title = "Recent News"
             }
-            adapter = NewsAdapter{
-                view.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(it))
+            adapter = NewsAdapter {
+                view.findNavController()
+                    .navigate(ListFragmentDirections.actionListFragmentToDetailFragment(it))
             }
             rvList.adapter = adapter
             rvList.layoutManager = LinearLayoutManager(requireContext())
@@ -55,14 +54,20 @@ class ListFragment : Fragment() {
 
     }
 
-    private fun observeViewModel(){
-        viewModel.data.observe(viewLifecycleOwner){
-            when(it){
-                is UiState.Error -> showError(message = it.errorMessage, showAction = true, action = { viewModel.getData() })
+    private fun observeViewModel() {
+        viewModel.data.observe(viewLifecycleOwner) {
+            when (it) {
+                is UiState.Error -> showError(
+                    message = it.errorMessage,
+                    showAction = true,
+                    action = { viewModel.getData() })
                 is UiState.Loading -> showLoading()
-                is UiState.NoData -> showError(message = requireContext().resources.getString(R.string.empty_data), showAction = false, action = {})
+                is UiState.NoData -> showError(
+                    message = requireContext().resources.getString(R.string.empty_data),
+                    showAction = false,
+                    action = {})
                 is UiState.Success<*> -> {
-                    it.data?.let {data ->
+                    it.data?.let { data ->
                         showData(data as List<NewsModel>)
                     }
                 }
@@ -70,24 +75,24 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun showError(message: String?, showAction: Boolean = true, action : () -> Unit){
+    private fun showError(message: String?, showAction: Boolean = true, action: () -> Unit) {
         binding.apply {
             rvList.hide()
             stopShimmer()
             layoutError.apply {
                 root.show()
                 tvMessage.text = message ?: getString(R.string.error_occured)
-                if(showAction){
+                if (showAction) {
                     btnAction.show()
                     btnAction.setOnClickListener {
                         action()
                     }
-                }else btnAction.hide()
+                } else btnAction.hide()
             }
         }
     }
 
-    private fun showLoading(){
+    private fun showLoading() {
         showShimmer()
         binding.apply {
             rvList.hide()
@@ -95,7 +100,7 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun showData(data: List<NewsModel>){
+    private fun showData(data: List<NewsModel>) {
         stopShimmer()
         binding.apply {
             rvList.show()
@@ -104,13 +109,14 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun showShimmer(){
+    private fun showShimmer() {
         binding.shimmer.apply {
             show()
             startShimmer()
         }
     }
-    private fun stopShimmer(){
+
+    private fun stopShimmer() {
         binding.shimmer.apply {
             hide()
             stopShimmer()
