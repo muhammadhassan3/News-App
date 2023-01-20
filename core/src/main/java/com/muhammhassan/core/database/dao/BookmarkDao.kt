@@ -17,7 +17,7 @@ interface BookmarkDao {
     fun findBookmarkedBooks(): Flow<List<BookmarkEntity>>
 
     @Query("select * from BookmarkEntity where title = :title")
-    fun getBookmarkedItem(title: String): Flow<BookmarkEntity>
+    fun getBookmarkedItem(title: String): Flow<BookmarkEntity?>
 
     @Query("delete from BookmarkEntity where title = :title")
     fun deleteBookmarkedItem(title: String)
