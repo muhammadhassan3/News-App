@@ -10,10 +10,13 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.muhammhassan.newsapp.R
 import com.muhammhassan.newsapp.databinding.FragmentDetailBinding
+import com.muhammhassan.newsapp.ui.viewmodel.DetailViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding: FragmentDetailBinding get() = _binding!!
+    private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
