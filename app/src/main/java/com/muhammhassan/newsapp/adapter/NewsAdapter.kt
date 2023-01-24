@@ -14,14 +14,14 @@ class NewsAdapter(private val onItemClick: (item: NewsModel) -> Unit) :
     private val data = arrayListOf<NewsModel>()
 
     fun setData(newData: List<NewsModel>){
-        data.clear()
-        data.addAll(newData)
         val diffCallback = NewsDiffUtil(data, newData)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
+        data.clear()
+        data.addAll(newData)
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class NewsDiffUtil(val oldData: List<NewsModel>, val newData: List<NewsModel>): DiffUtil.Callback(){
+    class NewsDiffUtil(private val oldData: List<NewsModel>, private val newData: List<NewsModel>): DiffUtil.Callback(){
         override fun getOldListSize(): Int {
             return oldData.size
         }

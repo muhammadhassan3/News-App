@@ -7,7 +7,7 @@ import com.muhammhassan.domain.usecase.DetailUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class DetailInteractor(val repository: NewsRepository): DetailUseCase {
+class DetailInteractor(private val repository: NewsRepository): DetailUseCase {
     override fun addBookmarkedData(news: NewsModel) {
         repository.addBookmarkNews(news.mapToBookmarkModel())
     }

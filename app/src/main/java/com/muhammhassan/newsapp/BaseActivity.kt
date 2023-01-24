@@ -12,10 +12,11 @@ class BaseActivity: Application() {
             androidContext(applicationContext)
             modules(listOf(
                 Module.provideApiClient,
+                Module.provideDatabase,
                 Module.provideDataSource,
                 Module.provideRepository,
                 com.muhammhassan.domain.di.Module.useCaseModule,
-                com.muhammhassan.newsapp.utils.Module.viewModelModule
+                com.muhammhassan.newsapp.di.Module.viewModelModule,
             ))
         }
     }

@@ -8,14 +8,14 @@ import com.muhammhassan.domain.model.NewsModel
 import com.muhammhassan.domain.usecase.DetailUseCase
 import kotlinx.coroutines.launch
 
-class DetailViewModel(val useCase: DetailUseCase) : ViewModel() {
+class DetailViewModel(private val useCase: DetailUseCase) : ViewModel() {
     private val _isBookmarked = MutableLiveData<Boolean>()
-    val isBookmarked: LiveData<Boolean> get() = _isBookmarked
+    private val isBookmarked: LiveData<Boolean> get() = _isBookmarked
 
     fun getIsBookmarked(title: String): LiveData<Boolean> {
         viewModelScope.launch {
             useCase.getSpecifiedData(title).collect {
-                _isBookmarked.value = it
+                _isBookmarked.postValue(it)
             }
         }
         return isBookmarked

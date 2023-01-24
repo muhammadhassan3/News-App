@@ -1,9 +1,12 @@
 package com.muhammhassan.newsapp.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,6 +45,15 @@ class ListFragment : Fragment() {
             toolbar.apply {
                 inflateMenu(R.menu.home_menu)
                 title = "Recent News"
+                menu.getItem(0).setOnMenuItemClickListener {
+                    try{
+                        val uri = Uri.parse("newsapp://bookmark")
+                        startActivity(Intent(Intent.ACTION_VIEW, uri))
+                    }catch (e: Exception){
+                        Toast.makeText(requireContext(), "Module Not Found", Toast.LENGTH_SHORT).show()
+                    }
+                    true
+                }
             }
             adapter = NewsAdapter {
                 view.findNavController()
