@@ -6,7 +6,11 @@ import okhttp3.Response
 
 class HeaderAuthorization: Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val response = chain.request().newBuilder().addHeader("Authorization", BuildConfig.API_KEY)
+        val response = chain.request().newBuilder().addHeader(authorization, BuildConfig.API_KEY)
         return chain.proceed(response.build())
+    }
+
+    companion object{
+        private const val authorization = "Authorization"
     }
 }

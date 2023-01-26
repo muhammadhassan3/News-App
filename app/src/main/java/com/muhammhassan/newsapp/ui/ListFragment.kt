@@ -44,7 +44,7 @@ class ListFragment : Fragment() {
         binding.apply {
             toolbar.apply {
                 inflateMenu(R.menu.home_menu)
-                title = "Recent News"
+                title = context.getString(R.string.recent_news)
                 menu.getItem(0).setOnMenuItemClickListener {
                     try{
                         val uri = Uri.parse("newsapp://bookmark")
@@ -133,5 +133,10 @@ class ListFragment : Fragment() {
             hide()
             stopShimmer()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

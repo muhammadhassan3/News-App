@@ -39,20 +39,8 @@ class NewsAdapter(private val onItemClick: (item: NewsModel) -> Unit) :
         }
 
     }
-    class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun getItemCount(): Int {
-        return data.size
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
-        with(holder){
+    class ViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(item: NewsModel, onItemClick: (item: NewsModel) -> Unit){
             binding.apply {
                 tvDesc.text = item.desc
                 tvTitle.text = item.title
@@ -66,5 +54,19 @@ class NewsAdapter(private val onItemClick: (item: NewsModel) -> Unit) :
                 onItemClick.invoke(item)
             }
         }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = data[position]
+        holder.bind(item, onItemClick)
     }
 }

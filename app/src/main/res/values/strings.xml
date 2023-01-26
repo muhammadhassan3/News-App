@@ -10,4 +10,5 @@
     <string name="title_bookmark">Bookmark Module</string>
     <string name="source">Source : %s</string>
     <string name="published_at">Published : %s</string>
+    <string name="recent_news">Recent News</string>
 </resources>

@@ -73,14 +73,16 @@ class DetailFragment : Fragment() {
     private fun observeViewModel(title: String) {
         viewModel.getIsBookmarked(title).observe(viewLifecycleOwner) {
             isBookmarked = it
-            if (it) {
-                binding.toolbar.menu.getItem(0).icon =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.baseline_bookmark_24)
-            } else
-                binding.toolbar.menu.getItem(0).icon = ContextCompat.getDrawable(
+            binding.toolbar.menu.getItem(0).icon =
+                ContextCompat.getDrawable(
                     requireContext(),
-                    R.drawable.baseline_bookmark_border_24
+                    if (it) R.drawable.baseline_bookmark_24 else R.drawable.baseline_bookmark_border_24
                 )
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
