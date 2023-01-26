@@ -11,15 +11,4 @@ class BookmarkInteractor(private val repository: NewsRepository): BookmarkUseCas
     override fun getData(): Flow<List<NewsModel>> {
         return repository.getBookmarkedNews().map { it.mapBookmarkToDomain() }
     }
-
-    companion object{
-        @Volatile
-        private var INSTANCE: BookmarkInteractor? = null
-
-        fun getInstance(repository: NewsRepository): BookmarkInteractor = INSTANCE ?: synchronized(this){
-            val instance = BookmarkInteractor(repository)
-            INSTANCE = instance
-            instance
-        }
-    }
 }

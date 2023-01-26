@@ -11,7 +11,9 @@ object Mapper {
             desc = articles.description,
             content = articles.content,
             image = articles.urlToImage,
-            url = articles.url
+            url = articles.url,
+            source = articles.source.name,
+            publishedAt = Utils.parseDate(articles.publishedAt)
         )
     }
 
@@ -21,7 +23,9 @@ object Mapper {
             desc = item.desc,
             content = item.content,
             image = item.imageUrl,
-            url = item.url
+            url = item.url,
+            source = item.source,
+            publishedAt = item.publishedAt
         )
     }
 }

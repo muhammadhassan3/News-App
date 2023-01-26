@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.muhammhassan.domain.model.NewsModel
 import com.muhammhassan.domain.utils.UiState
 import com.muhammhassan.newsapp.R
-import com.muhammhassan.newsapp.adapter.NewsAdapter
+import com.muhammhassan.domain.adapter.NewsAdapter
 import com.muhammhassan.newsapp.databinding.FragmentListBinding
 import com.muhammhassan.newsapp.ui.viewmodel.MainViewModel
 import com.muhammhassan.newsapp.utils.Extension.hide

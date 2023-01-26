@@ -22,15 +22,4 @@ class RemoteDataSourceImpl(val api: ApiInterface) : RemoteDataSource {
         it.printStackTrace()
         emit(ApiResponse.error(it.message.toString()))
     }
-
-    companion object {
-        @Volatile
-        private var INSTANCE: RemoteDataSourceImpl? = null
-
-        fun getInstance(api: ApiInterface): RemoteDataSourceImpl = INSTANCE ?: synchronized(this) {
-            val instance = RemoteDataSourceImpl(api)
-            INSTANCE = instance
-            instance
-        }
-    }
 }

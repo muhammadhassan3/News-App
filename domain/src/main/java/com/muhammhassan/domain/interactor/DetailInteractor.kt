@@ -19,15 +19,4 @@ class DetailInteractor(private val repository: NewsRepository): DetailUseCase {
     override fun getSpecifiedData(title: String): Flow<Boolean> {
         return repository.getSpecifiedData(title).map { value: BookmarkEntity? -> value != null }
     }
-
-    companion object{
-        @Volatile
-        private var INSTANCE: DetailInteractor? = null
-
-        fun getInstance(repository: NewsRepository): DetailInteractor = INSTANCE ?: synchronized(this){
-            val instance = DetailInteractor(repository)
-            INSTANCE = instance
-            instance
-        }
-    }
 }

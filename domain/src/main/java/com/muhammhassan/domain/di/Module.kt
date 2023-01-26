@@ -10,8 +10,8 @@ import org.koin.dsl.module
 
 object Module {
     val useCaseModule = module {
-        single<MainUseCase> { MainInteractor.getInstance(get()) }
-        single<DetailUseCase> { DetailInteractor.getInstance(get()) }
-        single<BookmarkUseCase> {BookmarkInteractor.getInstance(get())}
+        single<MainUseCase> { MainInteractor(get()) }
+        single<DetailUseCase> { DetailInteractor(get()) }
+        single<BookmarkUseCase> {BookmarkInteractor(get())}
     }
 }

@@ -27,15 +27,4 @@ class LocalDataSourceImpl(db: NewsDatabase) : LocalDataSource {
     override fun getSpecifiedData(title: String): Flow<BookmarkEntity?> {
         return dao.getBookmarkedItem(title)
     }
-
-    companion object {
-        @Volatile
-        private var INSTANCE: LocalDataSourceImpl? = null
-
-        fun getInstance(db: NewsDatabase): LocalDataSourceImpl = INSTANCE ?: synchronized(this) {
-            val instance = LocalDataSourceImpl(db)
-            INSTANCE = instance
-            instance
-        }
-    }
 }

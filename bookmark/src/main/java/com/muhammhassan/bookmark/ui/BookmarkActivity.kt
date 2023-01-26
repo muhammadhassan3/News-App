@@ -8,7 +8,7 @@ import com.muhammhassan.bookmark.databinding.ActivityBookmarkBinding
 import com.muhammhassan.bookmark.di.Module
 import com.muhammhassan.bookmark.ui.viewmodel.BookmarkViewModel
 import com.muhammhassan.newsapp.R
-import com.muhammhassan.newsapp.adapter.NewsAdapter
+import com.muhammhassan.domain.adapter.NewsAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
@@ -31,8 +31,9 @@ class BookmarkActivity : AppCompatActivity() {
             }
             rvList.apply {
                 layoutManager = LinearLayoutManager(this@BookmarkActivity)
-                newsAdapter = NewsAdapter{
-                    Toast.makeText(this@BookmarkActivity, "Item Selected", Toast.LENGTH_SHORT).show()
+                newsAdapter = NewsAdapter {
+                    Toast.makeText(this@BookmarkActivity, "Item Selected", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 adapter = newsAdapter
             }

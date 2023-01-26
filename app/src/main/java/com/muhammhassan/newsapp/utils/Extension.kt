@@ -1,11 +1,6 @@
 package com.muhammhassan.newsapp.utils
 
 import android.view.View
-import android.widget.ImageView
-import androidx.annotation.DrawableRes
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.muhammhassan.newsapp.R
 
 object Extension {
     fun View.hide() {
@@ -16,16 +11,4 @@ object Extension {
         this.visibility = View.VISIBLE
     }
 
-    fun ImageView.loadImage(url: String) {
-        Glide.with(this).load(url)
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .error(R.drawable.baseline_broken_image_24)
-            .placeholder(R.drawable.baseline_image_search_24).into(this)
-    }
-
-    fun ImageView.loadImage(@DrawableRes id: Int) {
-        Glide.with(this).load(id)
-            .diskCacheStrategy(DiskCacheStrategy.DATA)
-            .error(R.drawable.baseline_broken_image_24).into(this)
-    }
 }

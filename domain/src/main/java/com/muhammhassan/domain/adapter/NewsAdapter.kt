@@ -1,13 +1,13 @@
-package com.muhammhassan.newsapp.adapter
+package com.muhammhassan.domain.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.muhammhassan.domain.R
+import com.muhammhassan.domain.databinding.ItemLayoutBinding
 import com.muhammhassan.domain.model.NewsModel
-import com.muhammhassan.newsapp.R
-import com.muhammhassan.newsapp.databinding.ItemLayoutBinding
-import com.muhammhassan.newsapp.utils.Extension.loadImage
+import com.muhammhassan.domain.utils.Utils.loadImage
 
 class NewsAdapter(private val onItemClick: (item: NewsModel) -> Unit) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
@@ -57,7 +57,7 @@ class NewsAdapter(private val onItemClick: (item: NewsModel) -> Unit) :
                 tvDesc.text = item.desc
                 tvTitle.text = item.title
                 if(item.image != null){
-                    item.image?.let {
+                    item.image.let {
                         imgHeader.loadImage(it)
                     }
                 }else imgHeader.loadImage(R.drawable.baseline_image_not_supported_24)

@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.muhammhassan.domain.utils.Utils.loadImage
 import com.muhammhassan.newsapp.R
 import com.muhammhassan.newsapp.databinding.FragmentDetailBinding
 import com.muhammhassan.newsapp.ui.viewmodel.DetailViewModel
-import com.muhammhassan.newsapp.utils.Extension.loadImage
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
@@ -35,11 +35,6 @@ class DetailFragment : Fragment() {
         binding.apply {
             toolbar.apply {
                 title = data.title
-                content.text = data.content
-                if (data.image == null) imgHeader.setImageResource(R.drawable.baseline_image_not_supported_24)
-                data.image?.let {
-                    imgHeader.loadImage(it)
-                }
                 inflateMenu(R.menu.detail_menu)
                 menu.apply {
                     getItem(0).setOnMenuItemClickListener {
@@ -60,6 +55,14 @@ class DetailFragment : Fragment() {
                 setNavigationOnClickListener {
                     requireActivity().onBackPressedDispatcher.onBackPressed()
                 }
+            }
+
+            tvPublishedTime.text = resources.getString(R.string.published_at, data.publishedAt)
+            tvSource.text = resources.getString(R.string.source, data.source)
+            content.text = data.content
+            if (data.image == null) imgHeader.setImageResource(com.muhammhassan.domain.R.drawable.baseline_image_not_supported_24)
+            data.image?.let {
+                imgHeader.loadImage(it)
             }
 
         }

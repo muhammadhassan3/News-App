@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">News App</string>
-    <string name="header">Header</string>
     <string name="go_to_bookmark_list">Go to Bookmark List</string>
     <string name="bookmark_list">Bookmark List</string>
     <string name="retry">Retry</string>
@@ -9,4 +8,6 @@
     <string name="bookmark_news">Bookmark News</string>
     <string name="open_in_browser">Open in Browser</string>
     <string name="title_bookmark">Bookmark Module</string>
+    <string name="source">Source : %s</string>
+    <string name="published_at">Published : %s</string>
 </resources>

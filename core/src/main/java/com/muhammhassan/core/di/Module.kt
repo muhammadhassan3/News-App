@@ -20,12 +20,12 @@ object Module {
     }
 
     val provideDataSource = module {
-        single<RemoteDataSource> { RemoteDataSourceImpl.getInstance(get()) }
-        single<LocalDataSource> { LocalDataSourceImpl.getInstance(get()) }
+        single<RemoteDataSource> { RemoteDataSourceImpl(get()) }
+        single<LocalDataSource> { LocalDataSourceImpl(get()) }
     }
 
     val provideRepository = module {
-        single<NewsRepository> { NewsRepositoryImpl.getInstance(get(), get()) }
+        single<NewsRepository> { NewsRepositoryImpl(get(), get()) }
     }
 
     val provideDatabase = module {

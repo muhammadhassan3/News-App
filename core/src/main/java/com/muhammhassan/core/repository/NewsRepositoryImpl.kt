@@ -27,15 +27,4 @@ class NewsRepositoryImpl(private val remote: RemoteDataSource, private val local
     override fun getSpecifiedData(title: String): Flow<BookmarkEntity?> {
         return local.getSpecifiedData(title)
     }
-
-    companion object{
-        @Volatile
-        private var INSTANCE: NewsRepositoryImpl? = null
-
-        fun getInstance(remote: RemoteDataSource, local: LocalDataSource) = INSTANCE ?: synchronized(this){
-            val instance = NewsRepositoryImpl(remote, local)
-            INSTANCE = instance
-            instance
-        }
-    }
 }
