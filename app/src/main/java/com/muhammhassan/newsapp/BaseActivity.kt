@@ -10,14 +10,18 @@ class BaseActivity: Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(listOf(
-                Module.provideApiClient,
-                Module.provideDatabase,
-                Module.provideDataSource,
-                Module.provideRepository,
-                com.muhammhassan.domain.di.Module.useCaseModule,
-                com.muhammhassan.newsapp.di.Module.viewModelModule,
-            ))
+            modules(moduleList)
         }
+    }
+
+    companion object{
+        private val moduleList = listOf(
+            Module.provideApiClient,
+            Module.provideDatabase,
+            Module.provideDataSource,
+            Module.provideRepository,
+            com.muhammhassan.domain.di.Module.useCaseModule,
+            com.muhammhassan.newsapp.di.Module.viewModelModule,
+        )
     }
 }
