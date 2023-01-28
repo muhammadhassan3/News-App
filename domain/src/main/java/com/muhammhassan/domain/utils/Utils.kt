@@ -12,7 +12,6 @@ object Utils {
     fun parseDate(dateString: String): String{
         val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val date = format.parse(dateString)
-        println(date)
 
         val normalFormat = SimpleDateFormat("dd MMMM yyyy HH:mm", Locale("id","ID"))
         return date?.let { normalFormat.format(it) } ?: "Format error"
