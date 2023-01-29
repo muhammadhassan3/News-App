@@ -43,7 +43,7 @@ jobs:
           command: ./gradlew build
       - codecov/upload:
           file: './coverage/clover.xml'
-          token: 5dbd5afe-aec5-4426-b107-99e7ef2e4b52
+          token: CODECOV_TOKEN
       - store_artifacts:
           path: app/build/reports
           destination: reports
