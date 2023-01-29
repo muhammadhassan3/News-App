@@ -80,23 +80,23 @@ class LocalDataSourceImplTest {
     @Test
     fun `addData and verify method executed`() {
         local.addData(dummyData[0])
-        verify(db.bookmarkDao()).insertBookmarkedItem(any())
+        verify(db.bookmarkDao(), timeout(1000).times(1)).insertBookmarkedItem(dummyData[0])
     }
 
     @Test
     fun deleteData() {
-        dummyData[0].title?.let { local.deleteData(it) }
-        verify(db.bookmarkDao()).deleteBookmarkedItem(any())
+        local.deleteData(dummyData[0].title!!)
+        verify(db.bookmarkDao(), timeout(1000).times(1)).deleteBookmarkedItem(dummyData[0].title!!)
     }
 
     @Test
     fun getSpecifiedData() = runTest {
         val expected = flowOf(dummyData[0])
-        `when`(db.bookmarkDao().getBookmarkedItem(any())).thenReturn(expected)
+        `when`(db.bookmarkDao().getBookmarkedItem(dummyData[0].title!!)).thenReturn(expected)
         local.getSpecifiedData(dummyData[0].title!!).collect{
             assertNotNull(it)
-            assertEquals(dummyData, it)
+            assertEquals(dummyData[0], it)
         }
-        verify(db.bookmarkDao()).getBookmarkedItem(any())
+        verify(db.bookmarkDao()).getBookmarkedItem(dummyData[0].title!!)
     }
 }
